@@ -1,0 +1,13 @@
+<div class="feature">
+  <% if header? %>
+    <div class="header"><%= header %></div>
+  <% end %>
+
+  <% if body? %>
+    <div class="body"><%= body %></div>
+  <% end %>
+
+  <% actions.each do |action| %>
+    <div class="action"><%= action %></div>
+  <% end %>
+</div>

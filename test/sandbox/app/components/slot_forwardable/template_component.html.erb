@@ -1,0 +1,7 @@
+<div class="template">
+  <%= render ::SlotForwardable::FeatureComponent.new do |feature| %>
+    <% feature.with_header(header) if header? %>
+    <% feature.with_body(body) if body? %>
+    <% feature.with_actions(actions) if actions? %>
+  <% end %>
+</div>

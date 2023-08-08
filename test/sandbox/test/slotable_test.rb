@@ -719,4 +719,23 @@ class SlotableTest < ViewComponent::TestCase
 
     assert component.title.content?
   end
+
+  def test_forwardable_slots
+    render_inline(SlotForwardable::TemplateComponent.new) do |template|
+      template.with_header { "This is a header" }
+      template.with_body { "This is the body" }
+
+      template.with_action("Do something first")
+      template.with_action("Do something else")
+    end
+
+    assert_selector(".template")
+    assert_selector(".template > .feature")
+    assert_selector(".template > .feature > .header", text: "This is a header")
+    assert_selector(".template > .feature > .body", text: "This is the body")
+    assert_selector(".template > .feature > .action > button", count: 2)
+    assert_selector(".template > .feature > .action > button", text: "Do something first")
+    assert_selector(".template > .feature > .action > button", text: "Do something else")
+    assert_no_selector(".template > .feature > .action > button > *")
+  end
 end
